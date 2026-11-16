@@ -12,7 +12,7 @@ export const profile = {
   tagline:
     'I build end-to-end data and machine learning systems, from ingestion and data quality to models, evaluation and LLM-powered tools.',
   summary:
-    'MSc Data Science student at the University of Milano-Bicocca with a BSc in Computer Science. I build end-to-end machine learning and data projects: data pipelines and data quality checks, deep learning models for computer vision, and LLM-based tools evaluated against solid baselines. Background in software and web development, plus experience teaching programming. Looking for Data Scientist and ML/AI Engineer roles.',
+    'MSc Data Science student at the University of Milano-Bicocca with a BSc in Computer Science. I build end-to-end machine learning and data projects: data pipelines and quality checks, deep learning for computer vision, and LLM-based tools evaluated against solid baselines. Background in web development and teaching programming.',
 };
 
 export type Experience = {
@@ -30,8 +30,7 @@ export const experience: Experience[] = [
     location: 'Milan, Italy',
     period: '2024 – Present',
     bullets: [
-      'Design and build websites and small web tools for private clients, from requirements gathering to deployment.',
-      'Develop responsive front ends with HTML, CSS and JavaScript, including a booking and showcase website for a B&B.',
+      'Build websites and web tools for private clients, from requirements to deployment (HTML, CSS, JavaScript), e.g. a B&B booking site.',
     ],
   },
   {
@@ -40,9 +39,7 @@ export const experience: Experience[] = [
     location: 'Milan, Italy',
     period: 'Sep 2024 – Jun 2025',
     bullets: [
-      'Taught computational logic and introductory programming to 1st–3rd year technical high school classes.',
-      'Designed interactive learning plans and hands-on exercises in Visual Basic and Python.',
-      'Explained technical concepts to students with different levels of experience, adapting pace and materials.',
+      'Taught logic and introductory programming (Visual Basic, Python) to 1st–3rd year classes with interactive learning plans.',
     ],
   },
   {
@@ -51,8 +48,7 @@ export const experience: Experience[] = [
     location: 'Paderno Dugnano, Italy',
     period: 'Oct 2022 – Present',
     bullets: [
-      'Advise customers on home appliances, smartphones and mobile plans, translating technical specifications into clear recommendations.',
-      'Work part-time alongside full-time university studies.',
+      'Advise customers on appliances, smartphones and mobile plans, turning technical specs into clear recommendations.',
     ],
   },
 ];
@@ -71,15 +67,15 @@ export const education: Education[] = [
     school: 'University of Milano-Bicocca',
     location: 'Milan, Italy',
     period: '2025 – Present',
-    details: [
-      'Coursework projects in deep learning, data management and statistical modelling.',
-    ],
   },
   {
     degree: 'BSc in Computer Science',
     school: 'University of Milano-Bicocca',
     location: 'Milan, Italy',
     period: '2021 – 2025',
+    details: [
+      'Thesis (MUDI Lab internship): deployed two online decision support tools for medical AI (Flask, Gunicorn, Nginx) and built a Python tool for human–AI reliance analysis.',
+    ],
   },
 ];
 
@@ -90,8 +86,7 @@ export const skills: { group: string; items: string[] }[] = [
     items: ['scikit-learn', 'TensorFlow / Keras', 'PyTorch', 'Hugging Face Transformers', 'OpenCV', 'MediaPipe', 'LLM APIs'],
   },
   { group: 'Data', items: ['pandas', 'NumPy', 'Polars', 'DuckDB', 'Matplotlib', 'Seaborn', 'Dash'] },
-  { group: 'Backend', items: ['REST APIs', 'FastAPI'] },
-  { group: 'Databases', items: ['PostgreSQL', 'MongoDB', 'Redis'] },
+  { group: 'Backend & Databases', items: ['REST APIs', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Redis'] },
   { group: 'Tools', items: ['Git', 'GitHub Actions', 'Docker', 'pytest', 'uv'] },
 ];
 
@@ -107,6 +102,7 @@ export type Project = {
   repo: string;
   summary: string;
   bullets: string[];
+  cvBullets?: string[]; // shorter bullets for the one-page CV (defaults to bullets)
   tech: string[];
   status?: 'In progress';
   featured?: boolean; // shown with full detail on the site
@@ -115,6 +111,19 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: 'Image Quality Assessment',
+    repo: 'https://github.com/frabanfo/Image_quality_assessment',
+    summary:
+      'No-reference image quality assessment on real smartphone photos (LIVE In the Wild): CNNs vs Vision Transformers.',
+    bullets: [
+      'Compared single- and multi-scale EfficientNetV2-S CNNs with a pretrained Swin Transformer; best: SRCC 0.870, PLCC 0.887.',
+      'Controlled ablations: multi-scale features +0.102 SRCC, native-resolution crops +0.028; Grad-CAM for interpretability.',
+    ],
+    tech: ['TensorFlow', 'Keras', 'Hugging Face Transformers', 'EfficientNet', 'Grad-CAM'],
+    featured: true,
+    onCv: true,
+  },
+  {
     name: 'Odino: Vehicle Recall Prediction',
     repo: 'https://github.com/frabanfo/Odino',
     summary:
@@ -122,6 +131,9 @@ export const projects: Project[] = [
     bullets: [
       'Goal: predict whether a vehicle model and component will receive a new recall within 6 months, using NHTSA complaint, investigation and recall data.',
       'Combines tabular ML on complaint features with LLM-based extraction from free-text narratives and an agent layer on top.',
+    ],
+    cvBullets: [
+      'Predicting new vehicle recalls within 6 months from NHTSA complaints, combining tabular ML, LLM extraction from complaint narratives and an agent layer.',
     ],
     tech: ['Python', 'Polars', 'DuckDB', 'pydantic', 'LLMs', 'GitHub Actions'],
     status: 'In progress',
@@ -134,23 +146,10 @@ export const projects: Project[] = [
     summary:
       'A benchmark measuring how well LLMs solve chess puzzles depending on how the position is described, and a tutor that explains your own mistakes.',
     bullets: [
-      'Built an evaluation set of 2,006 Lichess puzzles stratified by rating and theme, with Stockfish as judge, six baselines and confidence intervals on every metric.',
-      'Developed a tutor that turns a player’s games into a weakness profile, targeted puzzles and LLM-explained HTML reports; 55 automated tests.',
+      'Benchmark of 2,006 Lichess puzzles stratified by rating and theme, with Stockfish as judge, six baselines and confidence intervals on every metric.',
+      'Tutor that turns a player’s games into a weakness profile, targeted puzzles and LLM-explained reports (55 tests).',
     ],
     tech: ['Python', 'LLMs', 'Stockfish', 'Batch API', 'pytest'],
-    featured: true,
-    onCv: true,
-  },
-  {
-    name: 'Image Quality Assessment',
-    repo: 'https://github.com/frabanfo/Image_quality_assessment',
-    summary:
-      'No-reference image quality assessment on real smartphone photos (LIVE In the Wild): CNNs vs Vision Transformers.',
-    bullets: [
-      'Compared single-scale and multi-scale EfficientNetV2-S CNNs with a pretrained Swin Transformer; best model reached test SRCC 0.870 / PLCC 0.887.',
-      'Ran controlled ablations: multi-scale features added +0.102 SRCC and native-resolution crops +0.028; used Grad-CAM to inspect predictions.',
-    ],
-    tech: ['TensorFlow', 'Keras', 'Hugging Face Transformers', 'EfficientNet', 'Grad-CAM'],
     featured: true,
     onCv: true,
   },
@@ -160,8 +159,8 @@ export const projects: Project[] = [
     summary:
       'Event-driven data pipeline correlating train delays with weather conditions across Lombardy.',
     bullets: [
-      'Built a pipeline with parallel ingestion from railway and weather APIs (Dramatiq, Redis), raw data lake and PostgreSQL data warehouse.',
-      'Implemented a data quality framework (schema validation, business rules, deduplication, quality KPIs) and spatio-temporal matching of trains and weather.',
+      'Event-driven pipeline (Dramatiq, Redis) loading railway and weather APIs into a data lake and PostgreSQL warehouse.',
+      'Data quality framework (schema checks, business rules, deduplication, KPIs) and spatio-temporal train–weather matching.',
     ],
     tech: ['Python', 'PostgreSQL', 'Redis', 'Dramatiq', 'Docker'],
     featured: true,

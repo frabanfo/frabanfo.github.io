@@ -72,6 +72,9 @@ const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\
         <p class="skill">
           <strong>Languages:</strong> {languages.map((l) => `${l.name} (${l.level})`).join(', ')}
         </p>
+        <p class="skill">
+          <strong>Certifications:</strong> {certifications.filter((c) => !c.startsWith('Cambridge')).join(', ')}
+        </p>
       </section>
 
       <section>
@@ -87,11 +90,10 @@ const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\
                 <a class="right" href={p.repo}>{host(p.repo)}</a>
               </div>
               <ul>
-                {p.bullets.map((b) => (
+                {(p.cvBullets ?? p.bullets).map((b) => (
                   <li>{b}</li>
                 ))}
               </ul>
-              <p class="tech">Tech: {p.tech.join(', ')}</p>
             </div>
           ))
         }
@@ -118,26 +120,20 @@ const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\
       </section>
 
 
-      <section>
-        <h2>Certifications</h2>
-        <ul>
-          {certifications.map((c) => <li>{c}</li>)}
-        </ul>
-      </section>
     </main>
   </body>
 </html>
 
 <style is:global>
-  @page { size: A4; margin: 12mm 14mm; }
+  @page { size: A4; margin: 10mm 13mm; }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     background: #e9ecef;
     color: #111;
     font-family: Calibri, Carlito, Arial, Helvetica, sans-serif;
-    font-size: 10.5pt;
-    line-height: 1.35;
+    font-size: 10pt;
+    line-height: 1.3;
   }
   a { color: #111; text-decoration: none; }
   .toolbar {
@@ -155,14 +151,14 @@ const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\
   .contact { margin: 0; font-size: 9.5pt; }
   h2 {
     font-size: 11.5pt; text-transform: uppercase; letter-spacing: 0.06em;
-    border-bottom: 1px solid #111; margin: 10pt 0 5pt; padding-bottom: 1pt;
+    border-bottom: 1px solid #111; margin: 8pt 0 4pt; padding-bottom: 1pt;
     break-after: avoid;
   }
-  h3 { font-size: 10.5pt; margin: 0; }
+  h3 { font-size: 10pt; margin: 0; }
   p { margin: 0 0 3pt; }
   ul { margin: 2pt 0 0; padding-left: 14pt; }
-  li { margin-bottom: 1.5pt; }
-  .item { margin-bottom: 6pt; break-inside: avoid; }
+  li { margin-bottom: 1pt; }
+  .item { margin-bottom: 5pt; break-inside: avoid; }
   .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
   .right { white-space: nowrap; font-size: 9.5pt; }
   .org { font-style: italic; margin: 0; }
