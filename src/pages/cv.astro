@@ -1,0 +1,182 @@
+---
+// ATS-friendly CV: single column, standard section titles, real text, no tables/icons/graphics.
+import { profile, experience, education, skills, projects, languages, certifications } from '../data/profile';
+
+const cvProjects = projects.filter((p) => p.onCv);
+const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{profile.name} – CV</title>
+    <meta name="description" content={`CV of ${profile.name}, ${profile.role}`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="toolbar">
+      <a href="/">← Back to site</a>
+      <a href="/cv.pdf" download>Download PDF</a>
+    </div>
+
+    <main class="page">
+      <header>
+        <h1>{profile.name}</h1>
+        <p class="title">{profile.role.replace(' · ', ' | ')}</p>
+        <p class="contact">
+          {profile.location} | <a href={`mailto:${profile.email}`}>{profile.email}</a> |
+          <a href={profile.linkedin}>{host(profile.linkedin)}</a> |
+          <a href={profile.github}>{host(profile.github)}</a> |
+          <a href={profile.website}>{host(profile.website)}</a>
+        </p>
+      </header>
+
+      <section>
+        <h2>Summary</h2>
+        <p>{profile.summary}</p>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        {
+          education.map((e) => (
+            <div class="item">
+              <div class="row">
+                <h3>{e.degree}</h3>
+                <span class="right">{e.period}</span>
+              </div>
+              <p class="org">{e.school}, {e.location}</p>
+              {e.details && (
+                <ul>
+                  {e.details.map((d) => (
+                    <li>{d}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        {
+          skills.map((s) => (
+            <p class="skill">
+              <strong>{s.group}:</strong> {s.items.join(', ')}
+            </p>
+          ))
+        }
+        <p class="skill">
+          <strong>Languages:</strong> {languages.map((l) => `${l.name} (${l.level})`).join(', ')}
+        </p>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+        {
+          cvProjects.map((p) => (
+            <div class="item">
+              <div class="row">
+                <h3>
+                  {p.name}
+                  {p.status && <span class="status"> ({p.status})</span>}
+                </h3>
+                <a class="right" href={p.repo}>{host(p.repo)}</a>
+              </div>
+              <ul>
+                {p.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+              <p class="tech">Tech: {p.tech.join(', ')}</p>
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        {
+          experience.map((e) => (
+            <div class="item">
+              <div class="row">
+                <h3>{e.role}</h3>
+                <span class="right">{e.period}</span>
+              </div>
+              <p class="org">{e.company}, {e.location}</p>
+              <ul>
+                {e.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </section>
+
+
+      <section>
+        <h2>Certifications</h2>
+        <ul>
+          {certifications.map((c) => <li>{c}</li>)}
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  @page { size: A4; margin: 12mm 14mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #e9ecef;
+    color: #111;
+    font-family: Calibri, Carlito, Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+  a { color: #111; text-decoration: none; }
+  .toolbar {
+    max-width: 210mm; margin: 0 auto; padding: 12px 16px;
+    display: flex; justify-content: space-between; font-family: Arial, sans-serif; font-size: 14px;
+  }
+  .toolbar a { color: #1a5fb4; }
+  .page {
+    max-width: 210mm; margin: 0 auto 32px; background: #fff; padding: 14mm 16mm;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  }
+  header { text-align: center; margin-bottom: 6pt; }
+  h1 { font-size: 20pt; margin: 0; letter-spacing: 0.02em; }
+  .title { font-size: 11.5pt; font-weight: bold; margin: 2pt 0; }
+  .contact { margin: 0; font-size: 9.5pt; }
+  h2 {
+    font-size: 11.5pt; text-transform: uppercase; letter-spacing: 0.06em;
+    border-bottom: 1px solid #111; margin: 10pt 0 5pt; padding-bottom: 1pt;
+    break-after: avoid;
+  }
+  h3 { font-size: 10.5pt; margin: 0; }
+  p { margin: 0 0 3pt; }
+  ul { margin: 2pt 0 0; padding-left: 14pt; }
+  li { margin-bottom: 1.5pt; }
+  .item { margin-bottom: 6pt; break-inside: avoid; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+  .right { white-space: nowrap; font-size: 9.5pt; }
+  .org { font-style: italic; margin: 0; }
+  .status { font-weight: normal; font-style: italic; }
+  .tech { font-size: 9.5pt; color: #333; margin: 1pt 0 0; }
+  .skill { margin-bottom: 2pt; }
+
+  @media (max-width: 640px) {
+    .page { padding: 20px 16px; }
+    .row { flex-wrap: wrap; }
+  }
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none; }
+    .page { box-shadow: none; margin: 0; padding: 0; max-width: none; }
+  }
+</style>

@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal portfolio and CV of Francesco Banfi",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "cv:pdf": "astro build && node scripts/cv-pdf.mjs"
+  },
+  "dependencies": {
+    "astro": "5.18.2"
+  }
+}
