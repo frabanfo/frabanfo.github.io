@@ -92,7 +92,7 @@ export const skills: { group: string; items: string[] }[] = [
 
 export const languages = [
   { name: 'Italian', level: 'Native' },
-  { name: 'English', level: 'B2, Cambridge certified; C1 university oral exam' },
+  { name: 'English', level: 'B2, Cambridge certified; C1, University of Milano-Bicocca internal certification' },
 ];
 
 export const certifications = ['Cisco CCNA (2021)', 'Cambridge English, B2'];
