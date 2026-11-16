@@ -72,7 +72,7 @@ export const education: Education[] = [
     location: 'Milan, Italy',
     period: '2025 – Present',
     details: [
-      'Coursework projects in deep learning, data management, statistical modelling and financial markets analytics.',
+      'Coursework projects in deep learning, data management and statistical modelling.',
     ],
   },
   {
@@ -144,12 +144,13 @@ export const projects: Project[] = [
   {
     name: 'Image Quality Assessment',
     repo: 'https://github.com/frabanfo/Image_quality_assessment',
-    summary: 'Deep learning models that predict the perceived quality of images.',
+    summary:
+      'No-reference image quality assessment on real smartphone photos (LIVE In the Wild): CNNs vs Vision Transformers.',
     bullets: [
-      'Trained and compared a CNN baseline, a multi-scale CNN and a pretrained Swin Transformer for perceived image quality regression.',
-      'Used Grad-CAM to inspect which image regions drive model predictions.',
+      'Compared single-scale and multi-scale EfficientNetV2-S CNNs with a pretrained Swin Transformer; best model reached test SRCC 0.870 / PLCC 0.887.',
+      'Ran controlled ablations: multi-scale features added +0.102 SRCC and native-resolution crops +0.028; used Grad-CAM to inspect predictions.',
     ],
-    tech: ['TensorFlow', 'Keras', 'Transformers', 'OpenCV', 'Grad-CAM'],
+    tech: ['TensorFlow', 'Keras', 'Hugging Face Transformers', 'EfficientNet', 'Grad-CAM'],
     featured: true,
     onCv: true,
   },
@@ -163,19 +164,6 @@ export const projects: Project[] = [
       'Implemented a data quality framework (schema validation, business rules, deduplication, quality KPIs) and spatio-temporal matching of trains and weather.',
     ],
     tech: ['Python', 'PostgreSQL', 'Redis', 'Dramatiq', 'Docker'],
-    featured: true,
-    onCv: true,
-  },
-  {
-    name: 'Dynamic Asset Allocation under AI-Concentration Risk',
-    repo: 'https://github.com/frabanfo/FMA',
-    summary:
-      'Out-of-sample comparison of Markowitz, Michaud resampling and Black–Litterman portfolios on a 19-ETF universe through the 2026 AI/semiconductor sell-off.',
-    bullets: [
-      'Implemented a walk-forward, no-look-ahead backtest with Ledoit–Wolf covariance shrinkage over 16 years of daily prices.',
-      'Evaluated risk-adjusted performance and AI/tech concentration across dated stress windows, with sensitivity analysis.',
-    ],
-    tech: ['Python', 'pandas', 'NumPy', 'yfinance'],
     featured: true,
     onCv: true,
   },
